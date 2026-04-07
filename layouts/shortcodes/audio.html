@@ -1,0 +1,6 @@
+
+{{/*  {{< audio src=/audio/test.mp3 >}}  */}}
+
+{{ with resources.Get (.Get "src") }}
+  <audio controls preload="auto" src="{{ .RelPermalink }}"></audio>
+{{ end }}

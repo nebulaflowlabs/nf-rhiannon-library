@@ -1,0 +1,22 @@
+{{- $variants    := slice -}}
+{{- $appearances := slice -}}
+{{- $size        := "" -}}
+
+{{- with .variants    }}{{- $variants    = . }}{{- end -}}
+{{- with .appearances }}{{- $appearances = . }}{{- end -}}
+{{- with .size -}}
+  {{- if in (slice "small" "medium" "large") . -}}
+    {{- $size = . -}}
+  {{- else -}}
+    {{- errorf "button partial: ungültiger size-Wert %q – erlaubt: small, medium, large" . -}}
+  {{- end -}}
+{{- end -}}
+
+ 
+  {{- range $variants }}
+  {{- $variant := . }}
+    {{- range $appearances }}
+    <wa-button{{ with . }} appearance="{{ . }}"{{ end }}{{ with $variant }} variant="{{ . }}"{{ end }}{{ with $size }} size="{{ . }}"{{ end }}>{{ . | title | default "Button" }}</wa-button>
+    {{- end }}
+  {{- end }}
+ 
